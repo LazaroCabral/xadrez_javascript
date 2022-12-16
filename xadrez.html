@@ -1,0 +1,78 @@
+<meta charset="UTF-8">
+
+<script>
+    function start(){
+
+        for(var j=0;j<8;j++){
+
+            for(var i=0; i<8 ;i++){
+                if(j==1){
+                totalcasas[j].push("p");
+                }
+                 if(j==6){
+                 totalcasas[j].push("p");
+                 }
+                 
+                 if(j!=1 && j!=6){
+                totalcasas[j].push(" ");
+                }
+
+            // document.write(totalcasas[j][i]); 
+            }
+        }
+    }
+
+    function atualizaCasas(){
+
+    }
+    function peao(casa){
+      
+    }    
+    var casas10=[];
+    var casas20=[];
+    var casas30=[];
+    var casas40=[];
+    var casas50=[];
+    var casas60=[];
+    var casas70=[];
+    var casas80=[];
+
+    var totalcasas=[    
+    casas10,
+    casas20,
+    casas30,
+    casas40,
+    casas50,
+    casas60,
+    casas70,
+    casas80];
+
+    start();
+
+for(var j=0; j<8;j++){
+
+    if(j==0){
+
+        document.write("_____________________________<br>");
+    }
+
+    for(var i=0; i<8;i++){
+        var controlador=null;
+        if(totalcasas[j][i]==" "){
+            document.write(" |&nbsp"+totalcasas[j][i]+"&nbsp ");
+        }
+        else{
+        document.write(" |&nbsp"+totalcasas[j][i]+" ");
+    }
+        if(i==7){
+            document.write("|<br>");
+            document.write("&nbsp-------------------------------------");
+        }
+
+    }
+    document.write("<br>");
+}
+
+    
+
+</script>
