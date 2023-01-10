@@ -2,15 +2,19 @@
 
 <script>
     function start(){
+        for(var i=0;i<8;i++){
+            peoesP1.push("p"+(i+1));
+            peoesP2.push("*p"+(i+1));
+        }
 
         for(var j=0;j<8;j++){
 
             for(var i=0; i<8 ;i++){
                 if(j==1){
-                totalcasas[j].push("p");
+                totalcasas[j].push(peoesP1[i]);
                 }
                  if(j==6){
-                 totalcasas[j].push("p");
+                 totalcasas[j].push(peoesP2[i]);
                  }
                  
                  if(j!=1 && j!=6){
@@ -23,14 +27,16 @@
     }
 
     function atualizaCasasGrafico(){
-    
+        var num=0;
         for(var j=0; j<8;j++){
 
             if(j==0){
                                 
                 document.write("&nbsp-------------------------------------<br>");
             }
-
+            
+            document.write(num);
+                num++;
             for(var i=0; i<8;i++){
              var controlador=null;
                 if(totalcasas[j][i]==" "){
@@ -42,31 +48,80 @@
                 if(i==7){
                 document.write("|<br>");
                 document.write("&nbsp-------------------------------------");
-                 }
+               // document.write("<br>");
+                }
 
             }
             document.write("<br>");
+            if(j==7){
+                for(var p=0; p<8;p++){
+                    if(p==0){
+                    document.write("&nbsp---        |"+(p));}
+                    if(p!=0){
+                    document.write("&nbsp--"+(p));}
+                }
+                document.write("<br>");
+            }
         }
-        document.write("<input>"+"digite"+"</input>"+"<br> <button>"+"yeh"+"</button>");
+       // document.write("<input>"+"digite"+"</input>"+"<br> <button>"+"yeh"+"</button>");
 
     }
 
-    function casa(numero){
+    function casaDecimal(numero){
         var decimal=null;
         var cas=null;
-        while(numero>10){
+        while(numero>=10){
             numero-=10;
             decimal+=10;
             
         }
-        cas=decimal/10
-        document.write(totalcasas[cas][numero]);
+        return decimal/10;
+        //document.write(totalcasas[cas][numero]);
+        
     }
     
-    function peao(casa,posicao){
+    function casaUnidade(numero){
+        while(numero>=10){
+            numero-=10;
+            
+        }
+        for(var i=0;i<8;i++){
+        if(numero==i){
+         return i;
+        }
+    }
+        return numero;
+        //document.write(totalcasas[cas][numero]);
+    }
 
+    function peca(peca1){
+        var exist=false;
+    for(var d=0; d<8;d++){
+        for(var u=0; u<8;u++){
+          
+          if(peca1==totalcasas[d][u]){
+             pecaDecimal=d;
+             pecaUnidade=u;
+             return true;
+            }
+          if(d==7 && u==7){
+             return false;
+            }
+        }
+    }
+
+    }
+    
+   // return exist;
+
+
+
+
+    function peao(posicao,casa){
+        var boolean=false;
         var result=0;
         var aux=0;
+
         for(var i=0; i<16 ;i++){
 
            // result=posicao+aux;
@@ -107,18 +162,14 @@
                 
             }
             //document.write("i="+i+" aux="+aux+" ");
-            document.write((posicao+aux)+" | ");
-
-            var auxDecimal=null;
-            var decimal=null;
-           while(casa>10){
-             casa-=10;
-             aux+=10;
+            //document.write((posicao+aux)+" | ");
+            if(posicao+aux==casa){
+                return boolean=true;
             }
-
-         decimal=auxDecimal/10
-         document.write("e"+totalcasas[decimal][casa]);
+        
         }
+
+        return boolean;
         //regras do peao
         
         /*linha reta{
@@ -159,12 +210,16 @@
          casas a esquerda baixo
          posicao-=22;
          posicao-=11;
-         */
+        */
         
         
- return aux;
-      
-    }    
+        //return aux;
+
+    }   
+
+    var peoesP1=[];
+    var peoesP2=[];
+
     var casas10=[];
     var casas20=[];
     var casas30=[];
@@ -188,9 +243,60 @@
     start();
     atualizaCasasGrafico();
 
-    
-    /*document.write(peao(1,34);//);*/
+    function teste(){
+       
+      //  if (input.value==5){
+        if(peca(inputPeca)==true){
+         alert("peca selecionada");
+         //if()
+          if(peao(((pecaDecimal*10)+pecaUnidade),input.value)==true){
+             document.write("foi");
+             totalcasas[pecaDecimal][pecaUnidade]=" ";
+             totalcasas[casaDecimal(input.value)][casaUnidade(input.value)]=inputPeca;
+           
+            }
+         atualizaCasasGrafico();
+         document.write("<br>");
+         document.write(casaDecimal(input.value)+" "+casaUnidade(input.value));
+         ++vezes_teste;
 
+        }
+        /*document.write("<input/>");
+        document.write("<button>ok</button>");
+        input=document.querySelector("input");
+        button=document.querySelector("button");
+        button.onclick= teste;
+       // }*/
+    }
+   // while(true){
+    //document.write("");
+   /* var input=document.querySelector("input");
+    document.write("<button>ok</button>");
+    var button=document.querySelector("button");
+    button.onclick= teste;*/
     
-  
+   // alert(input.value);
+    
+  //  }
+    var pecaDecimal=null;
+    var pecaUnidade=null;
+    
+    //document.write(peao(32,53));
+    var inputPeca="p1";
+    //var input=;
+    var vezes_teste=0;
+    for(var w= 0; w<3; w++){
+        var e=0;
+      e=setTimeout(() => {document.write("a ")}, 5000);
+    }
+   // while(vezes_teste<3){
+    document.write("<input/>");
+    var input=document.querySelector("input");
+    document.write("<button>ok</button>");
+    var button=document.querySelector("button");
+     button.onclick= teste;
+ //   }
+    
+    document.write(casaUnidade(10-10));
 </script>
+<br>
